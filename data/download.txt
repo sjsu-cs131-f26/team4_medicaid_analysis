@@ -1,5 +1,1 @@
-Dataset downloaded from: https://huggingface.co/datasets/AYUSHKHAIRE/real-time-stocks-data
-
-Place .csv file here and call it real-time-stocks-data.csv
-
-Final file path will be \data\real-time-stocks-data.csv
+Dataset downloaded from: https://opendata.hhs.gov/datasets/medicaid-provider-spending
