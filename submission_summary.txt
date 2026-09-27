@@ -1,0 +1,17 @@
+1. Sprint board
+	Marius - Product Manager
+	Dylan - Data Engineer
+	Justin - Data Engineer
+	Devin - Data Engineer
+	Rupashi - Data Storyteller
+
+2. Data card
+
+	Obtained using this command:
+
+	awk -F ',' 'BEGIN {srand(1)} NR == 1 {print $0} rand() < (1100.0 / 238015730.0) {print $0}' medicaid-provider-spending.csv >> sample.csv
+
+	The idea was too generate a sample of about 1000 lines.  To achieve this, I used the random generator on each line to determine whether 
+	it gets put into the sample or not.  Rand() outputs a float between 0 and 1, so to achieve this I used the formula TARGET_ROWS / TOTAL_ROWS.
+	This means that the sample should be about 1000 lines of randomly chosen data.  In the formula, I actually chose the TARGET_ROWS to be 1100
+	Just to avoid any under-choosing.  We also made the seed for srand() 1, just so its determinsitic each time

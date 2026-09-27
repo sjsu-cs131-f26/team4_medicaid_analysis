@@ -1,8 +1,0 @@
-1. Sprint board
-	Marius - Product Manager
-	Dylan - Data Engineer
-	Justin - Data Engineer
-	Devin - Data Engineer
-	Rupashi - Data Storyteller
-
-2. 
