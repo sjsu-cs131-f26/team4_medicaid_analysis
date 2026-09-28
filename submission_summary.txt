@@ -15,3 +15,17 @@
 	it gets put into the sample or not.  Rand() outputs a float between 0 and 1, so to achieve this I used the formula TARGET_ROWS / TOTAL_ROWS.
 	This means that the sample should be about 1000 lines of randomly chosen data.  In the formula, I actually chose the TARGET_ROWS to be 1100
 	Just to avoid any under-choosing.  We also made the seed for srand() 1, just so its determinsitic each time
+
+3. Links:
+	Github: https://github.com/sjsu-cs131-f26/team4_medicaid_analysis/tree/main
+
+	Pull requests:
+		https://github.com/sjsu-cs131-f26/team4_medicaid_analysis/pull/1
+		https://github.com/sjsu-cs131-f26/team4_medicaid_analysis/pull/2
+		https://github.com/sjsu-cs131-f26/team4_medicaid_analysis/pull/3
+		https://github.com/sjsu-cs131-f26/team4_medicaid_analysis/pull/4
+
+	Board: https://trello.com/b/k71Nv6qN/cs131team4
+
+	Original data-set: https://opendata.hhs.gov/datasets/medicaid-provider-spending
+

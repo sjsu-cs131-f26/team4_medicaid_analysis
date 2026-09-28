@@ -1,0 +1,8 @@
+Reading data-set metadata: 6.140638617 seconds
+Generating Sample: 528.284138698 seconds
+Frequency table by claim year: .005628809 seconds
+Frequency table by HCPCS code: .008397536 seconds
+Top 10 servicing providers: .013499547 seconds
+Regex from 2023-2024: .004722198 seconds
+Skinny table: .005064462 seconds
+Profile: .006594762 seconds

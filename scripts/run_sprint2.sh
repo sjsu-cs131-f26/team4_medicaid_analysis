@@ -18,7 +18,7 @@ echo -e "\tOutput dir: $out_folder"
 end_time=$(date +%s.%N)
 elapsed=$(echo "$end_time - $start_time" | bc)
 echo -e "...Completed (time elapsed: $elapsed seconds)\n"
-
+echo -e "Reading data-set metadata: $elapsed seconds" > $out_folder/time.txt
 
 
 
@@ -28,7 +28,7 @@ echo "Generating Sample..."
 start_time=$(date +%s.%N)
 
 mkdir -p $sample_folder
-awk -F ',' -v total="$data_row_count" 'BEGIN {srand(1)} NR == 1 {print $0} rand() < (1100.0 / total) {print $0}' $data_folder/$data_file > $sample_folder/$sample_file
+awk -F ',' -v total="$data_row_count" 'BEGIN {srand(1)} NR == 1 {print $0} ($1 != "" && $2 != "" && rand() < (1100.0 / total)) {print $0}' $data_folder/$data_file > $sample_folder/$sample_file
 
 #Print sample info
 echo -e "\tHeader: $(head -n 1 $sample_folder/$sample_file)"
@@ -37,6 +37,9 @@ echo -e "\tRaw Size (bytes): $(wc -c $sample_folder/$sample_file)"
 end_time=$(date +%s.%N)
 elapsed=$(echo "$end_time - $start_time" | bc)
 echo -e "...Completed (time elapsed: $elapsed seconds)\n"
+echo -e "Generating Sample: $elapsed seconds" >> $out_folder/time.txt
+
+
 
 # Task 3: Shell analysis artifacts
 
@@ -55,6 +58,7 @@ tail -n +2 "$sample_folder/$sample_file" \
 end_time=$(date +%s.%N)
 elapsed=$(echo "$end_time - $start_time" | bc)
 echo -e "...Completed (time elapsed: $elapsed seconds)\n"
+echo -e "Frequency table by claim year: $elapsed seconds" >> $out_folder/time.txt
 
 
 
@@ -70,6 +74,7 @@ tail -n +2 "$sample_folder/$sample_file" \
 end_time=$(date +%s.%N)
 elapsed=$(echo "$end_time - $start_time" | bc)
 echo -e "...Completed (time elapsed: $elapsed seconds)\n"
+echo -e "Frequency table by HCPCS code: $elapsed seconds" >> $out_folder/time.txt
 
 
 
@@ -86,6 +91,7 @@ tail -n +2 "$sample_folder/$sample_file" \
 end_time=$(date +%s.%N)
 elapsed=$(echo "$end_time - $start_time" | bc)
 echo -e "...Completed (time elapsed: $elapsed seconds)\n"
+echo -e "Top 10 servicing providers: $elapsed seconds" >> $out_folder/time.txt
 
 
 
@@ -108,6 +114,7 @@ END {
 end_time=$(date +%s.%N)
 elapsed=$(echo "$end_time - $start_time" | bc)
 echo -e "...Completed (time elapsed: $elapsed seconds)\n"
+echo -e "Regex from 2023-2024: $elapsed seconds" >> $out_folder/time.txt
 
 
 
@@ -121,6 +128,7 @@ tail -n +2 "$sample_folder/$sample_file" \
 end_time=$(date +%s.%N)
 elapsed=$(echo "$end_time - $start_time" | bc)
 echo -e "...Completed (time elapsed: $elapsed seconds)\n"
+echo -e "Skinny table: $elapsed seconds" >> $out_folder/time.txt
 
 
 
@@ -139,3 +147,5 @@ echo "-------------------------------"
 end_time=$(date +%s.%N)
 elapsed=$(echo "$end_time - $start_time" | bc)
 echo -e "...Completed (time elapsed: $elapsed seconds)\n"
+echo -e "Profile: $elapsed seconds" >> $out_folder/time.txt
+

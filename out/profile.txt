@@ -1,4 +1,4 @@
 File-size command: wc -c "../data/samples/sample_1000.csv" | cut -d' ' -f1
-52521 bytes
+49850 bytes
 Data-row-count command: tail -n +2 "../data/samples/sample_1000.csv" | wc -l
-1079 lines
+1007 lines
