@@ -1,28 +1,42 @@
 #Global variables
+echo ""
 echo "Reading data-set metadata..."
+start_time=$(date +%s.%N)
+
 data_folder="/mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026"
 data_file="medicaid-provider-spending.csv"
-data_file_size=$(wc -l $data_folder/$data_file | cut -d' ' -f1)
+data_row_count=$(wc -l $data_folder/$data_file | cut -d' ' -f1)
 sample_folder="../data/samples"
 sample_file="sample_1000.csv"
 out_folder="../out"
+
+echo -e "\tMedicaid data set: $data_folder/$data_file"
+echo -e "\tMedicaid row count: $data_row_count"
+echo -e "\tSample file: $sample_folder/$sample_file"
+echo -e "\tOutput dir: $out_folder"
+
+end_time=$(date +%s.%N)
+elapsed=$(echo "$end_time - $start_time" | bc)
+echo -e "...Completed (time elapsed: $elapsed seconds)\n"
+
 
 
 
 
 #Task 2: Create sample.csv
 echo "Generating Sample..."
+start_time=$(date +%s.%N)
+
 mkdir -p $sample_folder
-awk -F ',' -v total="$data_file_size" 'BEGIN {srand(1)} NR == 1 {print $0} rand() < (1100.0 / total) {print $0}' $data_folder/$data_file > $sample_folder/$sample_file
-echo "Succesfully Generated Sample:"
+awk -F ',' -v total="$data_row_count" 'BEGIN {srand(1)} NR == 1 {print $0} rand() < (1100.0 / total) {print $0}' $data_folder/$data_file > $sample_folder/$sample_file
 
 #Print sample info
 echo -e "\tHeader: $(head -n 1 $sample_folder/$sample_file)"
-echo -e "\tRows: $(tail -n +2 $sample_folder/$sample_file | wc -l $sample_folder/$sample_file)"
+echo -e "\tRows: $(tail -n +2 $sample_folder/$sample_file | wc -l)"
 echo -e "\tRaw Size (bytes): $(wc -c $sample_folder/$sample_file)"
-echo ""
-
-
+end_time=$(date +%s.%N)
+elapsed=$(echo "$end_time - $start_time" | bc)
+echo -e "...Completed (time elapsed: $elapsed seconds)\n"
 
 # Task 3: Shell analysis artifacts
 
@@ -30,6 +44,7 @@ mkdir -p $out_folder
 
 # 1. Frequency table by claim year
 echo "Creaing frequency table by claim year..."
+start_time=$(date +%s.%N)
 tail -n +2 "$sample_folder/$sample_file" \
 | cut -d',' -f4 \
 | cut -d'-' -f1 \
@@ -37,18 +52,30 @@ tail -n +2 "$sample_folder/$sample_file" \
 | uniq -c \
 | sort -nr \
 > $out_folder/freq_claim_year.txt
+end_time=$(date +%s.%N)
+elapsed=$(echo "$end_time - $start_time" | bc)
+echo -e "...Completed (time elapsed: $elapsed seconds)\n"
+
+
 
 # 2. Frequency table by HCPCS code
 echo "Creating frequency table by HCPCS code..."
+start_time=$(date +%s.%N)
 tail -n +2 "$sample_folder/$sample_file" \
 | cut -d',' -f3 \
 | sort \
 | uniq -c \
 | sort -nr \
 > $out_folder/freq_hcpcs_code.txt
+end_time=$(date +%s.%N)
+elapsed=$(echo "$end_time - $start_time" | bc)
+echo -e "...Completed (time elapsed: $elapsed seconds)\n"
+
+
 
 # 3. Top 10 servicing providers
 echo "Creating top 10 servicing providers..."
+start_time=$(date +%s.%N)
 tail -n +2 "$sample_folder/$sample_file" \
 | cut -d',' -f2 \
 | sort \
@@ -56,9 +83,15 @@ tail -n +2 "$sample_folder/$sample_file" \
 | sort -nr \
 | head -n 10 \
 > $out_folder/top10_servicing_provider.txt
+end_time=$(date +%s.%N)
+elapsed=$(echo "$end_time - $start_time" | bc)
+echo -e "...Completed (time elapsed: $elapsed seconds)\n"
+
+
 
 # 4. Extended-regex filter for 2023-2024 records
 echo "Creating filter for 2023-2024 records..."
+start_time=$(date +%s.%N)
 tail -n +2 "$sample_folder/$sample_file" \
 | grep -E '^[^,]*,[^,]*,[^,]*,202[34]-' \
 | awk -F',' '{
@@ -72,25 +105,37 @@ END {
     print "Total claim lines:", claim_lines
 }' \
 > $out_folder/filter_recent_summary.txt
+end_time=$(date +%s.%N)
+elapsed=$(echo "$end_time - $start_time" | bc)
+echo -e "...Completed (time elapsed: $elapsed seconds)\n"
+
+
 
 # 5. Deduplicated skinny table
 echo "Creating deduplicated skinny table..."
+start_time=$(date +%s.%N)
 tail -n +2 "$sample_folder/$sample_file" \
 | cut -d',' -f3,4 \
 | sort -u \
 > $out_folder/skinny_unique_hcpcs_claim_date.csv
+end_time=$(date +%s.%N)
+elapsed=$(echo "$end_time - $start_time" | bc)
+echo -e "...Completed (time elapsed: $elapsed seconds)\n"
+
+
 
 # 6. Profile
-echo "Creating profile:"
+echo "Creating profile..."
+start_time=$(date +%s.%N)
 echo "-------------------------------"
 {
-    echo "File-size command: ls -lh $sample_folder/$sample_file"
-    ls -lh "$sample_folder/$sample_file"
+    echo "File-size command: wc -c \"$sample_folder/$sample_file\" | cut -d' ' -f1"
+    echo "$(wc -c "$sample_folder/$sample_file" | cut -d' ' -f1) bytes"
 
-    echo "Data-row-count command: tail -n +2 $sample_folder/$sample_file | wc -l"
-    tail -n +2 "$sample_folder/$sample_file" | wc -l
+    echo "Data-row-count command: tail -n +2 \"$sample_folder/$sample_file\" | wc -l"
+    echo "$(tail -n +2 "$sample_folder/$sample_file" | wc -l) lines"
 } | tee $out_folder/profile.txt
 echo "-------------------------------"
-
-echo ""
-echo "DONE"
+end_time=$(date +%s.%N)
+elapsed=$(echo "$end_time - $start_time" | bc)
+echo -e "...Completed (time elapsed: $elapsed seconds)\n"

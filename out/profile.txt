@@ -1,4 +1,4 @@
-File-size command: ls -lh ../data/samples/sample_1000.csv
--rw-r--r-- 1 mariusa jelenag 52K Sep 28 01:53 ../data/samples/sample_1000.csv
-Data-row-count command: tail -n +2 ../data/samples/sample_1000.csv | wc -l
-1079
+File-size command: wc -c "../data/samples/sample_1000.csv" | cut -d' ' -f1
+52521 bytes
+Data-row-count command: tail -n +2 "../data/samples/sample_1000.csv" | wc -l
+1079 lines
