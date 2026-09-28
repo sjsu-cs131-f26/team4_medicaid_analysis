@@ -1,0 +1,3 @@
+Matching records: 74169550
+Total patients: 3888157174
+Total claim lines: 6943280985
