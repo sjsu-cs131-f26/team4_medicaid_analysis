@@ -1,4 +1,4 @@
-File-size command: ls -lh /mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/medicaid-provider-spending.csv
--rw-rw-r--+ 1 mariusa jelenag 11G Apr  6 10:09 /mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/medicaid-provider-spending.csv
-Data-row-count command: tail -n +2 /mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/medicaid-provider-spending.csv | wc -l
-238015729
+File-size command: ls -lh ../data/samples/sample_1000.csv
+-rw-r--r-- 1 mariusa jelenag 52K Sep 28 01:53 ../data/samples/sample_1000.csv
+Data-row-count command: tail -n +2 ../data/samples/sample_1000.csv | wc -l
+1079
