@@ -23,46 +23,46 @@ awk -F"\t" '
 		curr_total_paid=$4
 		curr_avg_paid=(curr_total_paid/curr_total_patients)
 
-		if (lowest_paid_month[curr_hcpcs] == 0) {
+		if ((lowest_paid_month[curr_hcpcs] == 0)) {
 			lowest_paid[curr_hcpcs]=curr_avg_paid
 			lowest_paid_month[curr_hcpcs]=curr_claim_month
 		}
 
-		if (lowest_patients_month[curr_hcpcs] == 0) {
+		if ((lowest_patients_month[curr_hcpcs] == 0)) {
 			lowest_patients[curr_hcpcs]=curr_total_patients
 			lowest_patients_month[curr_hcpcs]=curr_claim_month
 		}
 
-		if (lowest_paid[curr_hcpcs] >= curr_avg_paid) {
-			if (lowest_paid[curr_hcpcs] == curr_avg_paid) {
-                        	if (curr_claim_month < lowest_paid_month[curr_hcpcs]) { lowest_paid_month[curr_hcpcs]=curr_claim_month }
+		if ((lowest_paid[curr_hcpcs] >= curr_avg_paid)) {
+			if ((lowest_paid[curr_hcpcs] == curr_avg_paid)) {
+                        	if ((curr_claim_month < lowest_paid_month[curr_hcpcs])) { lowest_paid_month[curr_hcpcs]=curr_claim_month }
 			} else {
 				lowest_paid[curr_hcpcs]=curr_avg_paid
 				lowest_paid_month[curr_hcpcs]=curr_claim_month
 			}
 		}
-		if (lowest_patients[curr_hcpcs] >= curr_total_patients) {
-                        if (lowest_patients[curr_hcpcs] == curr_total_patients) {
-                                if (curr_claim_month < lowest_patients_month[curr_hcpcs]) { lowest_patients_month[curr_hcpcs]=curr_claim_month }
+		if ((lowest_patients[curr_hcpcs] >= curr_total_patients)) {
+                        if ((lowest_patients[curr_hcpcs] == curr_total_patients)) {
+                                if ((curr_claim_month < lowest_patients_month[curr_hcpcs])) { lowest_patients_month[curr_hcpcs]=curr_claim_month }
                         } else {
                                 lowest_patients[curr_hcpcs]=curr_total_patients
                                 lowest_patients_month[curr_hcpcs]=curr_claim_month
                         }
 		}
 
-                if (highest_paid[curr_hcpcs] <= curr_avg_paid) {
+                if ((highest_paid[curr_hcpcs] <= curr_avg_paid)) {
 
-                        if (highest_paid[curr_hcpcs] == curr_avg_paid) {
-                                if (curr_claim_month < highest_paid_month[curr_hcpcs]) { highest_paid_month[curr_hcpcs]=curr_claim_month }
+                        if ((highest_paid[curr_hcpcs] == curr_avg_paid)) {
+                                if ((curr_claim_month < highest_paid_month[curr_hcpcs])) { highest_paid_month[curr_hcpcs]=curr_claim_month }
                         } else {
                                 highest_paid[curr_hcpcs]=curr_avg_paid
                                 highest_paid_month[curr_hcpcs]=curr_claim_month
                         }
                 }
-                if (highest_patients[curr_hcpcs] <= curr_total_patients) {
+                if ((highest_patients[curr_hcpcs] <= curr_total_patients)) {
 
-                        if (highest_patients[curr_hcpcs] == curr_total_patients) {
-                                if (curr_claim_month < highest_patients_month[curr_hcpcs]) { highest_patients_month[curr_hcpcs]=curr_claim_month }
+                        if ((highest_patients[curr_hcpcs] == curr_total_patients)) {
+                                if ((curr_claim_month < highest_patients_month[curr_hcpcs])) { highest_patients_month[curr_hcpcs]=curr_claim_month }
                         } else {
                                 highest_patients[curr_hcpcs]=curr_total_patients
                                 highest_patients_month[curr_hcpcs]=curr_claim_month
