@@ -8,7 +8,7 @@ awk -F"\t" '
 	END { 
 		for (hcpcs in total_patients) { 
 			for (month in total_patients[hcpcs]) { 
-				print hcpcs "\t" month "\t" total_patients[hcpcs][month] "\t" total_paid[hcpcs][month] 
+				printf "%s\t%s\t%.0f\t%.2f\n", hcpcs, month, total_patients[hcpcs][month], total_paid[hcpcs][month]
 			} 
 		} 
 	}
@@ -21,7 +21,7 @@ awk -F"\t" '
 		curr_claim_month=$2
 		curr_total_patients=$3
 		curr_total_paid=$4
-		curr_avg_paid=(curr_total_paid/curr_total_patients)
+		curr_avg_paid=sprintf("%.2f",curr_total_paid/curr_total_patients)+0
 
 		if ((lowest_paid_month[curr_hcpcs] == 0)) {
 			lowest_paid[curr_hcpcs]=curr_avg_paid
