@@ -23,6 +23,6 @@ FROM hcpcs_sum
 GROUP BY 
 	HCPCS_CODE 
 ORDER BY 
-	HCPCS_CODE ASC;
+	HCPCS_CODE ASC, CLAIM_FROM_MONTH DESC;
 
 COPY duckdb_result TO '../out/duckdb_text_result.tsv' (HEADER, DELIMITER '\t');

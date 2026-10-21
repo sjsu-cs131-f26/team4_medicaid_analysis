@@ -27,11 +27,19 @@ awk -F"\t" '
 			lowest_paid[curr_hcpcs]=curr_avg_paid
 			lowest_paid_month[curr_hcpcs]=curr_claim_month
 		}
-
 		if ((lowest_patients_month[curr_hcpcs] == 0)) {
 			lowest_patients[curr_hcpcs]=curr_total_patients
 			lowest_patients_month[curr_hcpcs]=curr_claim_month
 		}
+                if ((highest_paid_month[curr_hcpcs] == 0)) {
+                        highest_paid[curr_hcpcs]=curr_avg_paid
+                        highest_paid_month[curr_hcpcs]=curr_claim_month
+                }
+                if ((highest_patients_month[curr_hcpcs] == 0)) {
+                        highest_patients[curr_hcpcs]=curr_total_patients
+                        highest_patients_month[curr_hcpcs]=curr_claim_month
+                }
+
 
 		if ((lowest_paid[curr_hcpcs] >= curr_avg_paid)) {
 			if ((lowest_paid[curr_hcpcs] == curr_avg_paid)) {
