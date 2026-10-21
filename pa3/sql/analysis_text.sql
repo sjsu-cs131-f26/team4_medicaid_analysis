@@ -1,4 +1,4 @@
-
+-- Takes the analysis_ready and combines all the rows with the same HCPCS_CODE and CLAIM_FROM_MONTH by summing the remaining columns --
 CREATE TABLE hcpcs_sum AS
 SELECT
     HCPCS_CODE,
@@ -13,7 +13,10 @@ ORDER BY
     HCPCS_CODE ASC,
     CLAIM_FROM_MONTH ASC;
 
+-- Takes the hcpcs_sum just generated and, first groups them by HCPCS_CODE, then looks for the lowest/highest claim month and amount paid out --
 CREATE TABLE duckdb_result AS
+
+-- Rank sorts them first which makes ties determinsitic (ties should take the "lowest" or oldest month)
 WITH ranked AS (
     SELECT
         HCPCS_CODE,
@@ -24,20 +27,14 @@ WITH ranked AS (
         ROW_NUMBER() OVER (
             PARTITION BY HCPCS_CODE
             ORDER BY
-                ROUND(
-                    TOTAL_PAID_SUM / NULLIF(TOTAL_CLAIM_LINES_SUM, 0),
-                    2
-                ) ASC NULLS LAST,
+                ROUND(TOTAL_PAID_SUM / TOTAL_CLAIM_LINES_SUM, 2) ASC,
                 CLAIM_FROM_MONTH ASC
         ) AS paid_asc_rank,
 
         ROW_NUMBER() OVER (
             PARTITION BY HCPCS_CODE
             ORDER BY
-                ROUND(
-                    TOTAL_PAID_SUM / NULLIF(TOTAL_CLAIM_LINES_SUM, 0),
-                    2
-                ) DESC NULLS LAST,
+                ROUND(TOTAL_PAID_SUM / TOTAL_CLAIM_LINES_SUM, 2) DESC,
                 CLAIM_FROM_MONTH ASC
         ) AS paid_desc_rank,
 
