@@ -51,12 +51,22 @@ awk -F"\t" '
 		}
 
                 if (highest_paid[curr_hcpcs] <= curr_avg_paid) {
-                        highest_paid[curr_hcpcs]=curr_avg_paid
-			highest_paid_month[curr_hcpcs]=curr_claim_month
+
+                        if (highest_paid[curr_hcpcs] == curr_avg_paid) {
+                                if (curr_claim_month < highest_paid_month[curr_hcpcs]) { highest_paid_month[curr_hcpcs]=curr_claim_month }
+                        } else {
+                                highest_paid[curr_hcpcs]=avg_paid
+                                highest_paid_month[curr_hcpcs]=curr_claim_month
+                        }
                 }
                 if (highest_patients[curr_hcpcs] <= curr_total_patients) {
-                        highest_patients[curr_hcpcs]=curr_total_patients
-			highest_patients_month[curr_hcpcs]=curr_claim_month
+
+                        if (highest_patients[curr_hcpcs] == curr_total_patients) {
+                                if (curr_claim_month < highest_patients_month[curr_hcpcs]) { highest_patients_month[curr_hcpcs]=curr_claim_month }
+                        } else {
+                                highest_patients[curr_hcpcs]=curr_total_patients
+                                highest_patients_month[curr_hcpcs]=curr_claim_month
+                        }
                 }
 	}
 	END {
