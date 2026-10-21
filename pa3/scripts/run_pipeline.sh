@@ -29,7 +29,7 @@ echo -e "Filtering dataset..." >  "$log_file"
 # Filters out unncessary fields, entries with $0 paid out, and entries with invalid HCPCS codes
 cut -d',' -f3,4,6,7 "$dataset_file" | \
 sed 's/,/\t/g' | \
-awk -F'\t' '($4 != 0 || NR == 1) {print $0}' | \
+awk -F'\t' '($4 > 0 || NR == 1) {print $0}' | \
 awk -F'\t' '(NR == 1 || $1 ~ /^[A-Z][0-9]{4}$/) {print $0}' > "$output_file"
 
 echo -e "..Data filtered\n" >> "$log_file"
@@ -46,3 +46,4 @@ echo -e "$(wc -l < "$output_file") records kept out of $(wc -l < "$dataset_file"
 #---------------------------
 #TASK 3: Three way analysis
 #---------------------------
+./run_shell_analysis.sh
