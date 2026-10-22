@@ -84,4 +84,3 @@ awk -F"\t" '
 	}
 
 ' "../work/shell_hcpcs_sum.tsv" | sort | awk -F"\t" 'BEGIN { print "HCPCS_CODE\tLOWEST_PAID_MONTH\tHIGHEST_PAID_MONTH\tLOWEST_DEMAND_MONTH\tHIGHEST_DEMAND_MONTH" } { print $0 }' > $output_file
-echo "SHELL DONE"
