@@ -1,4 +1,7 @@
 -- Takes the analysis_ready and combines all the rows with the same HCPCS_CODE and CLAIM_FROM_MONTH by summing the remaining columns --
+DROP TABLE IF EXISTS hcpcs_sum;
+DROP TABLE IF EXISTS duckdb_result;
+
 CREATE TABLE hcpcs_sum AS
 SELECT
     HCPCS_CODE,
