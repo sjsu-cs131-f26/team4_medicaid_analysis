@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#set -euo pipefail
+set -euo pipefail
 
 #Parameters
 dataset_file="${1:-../data/sample/sample_1000.csv}"
@@ -59,3 +59,25 @@ echo -e "Running duckdb parquet analysis..." | tee -a "$log_file"
 $DUCKDB ../work/project.duckdb < ../sql/build_parquet.sql > ../logs/build_parquet.log 2>&1
 $DUCKDB ../work/project.duckdb < ../sql/analysis_parquet.sql > ../logs/duckdb_parquet.log 2>&1
 echo -e "...Done" | tee -a "$log_file"
+
+#---------------------------
+#TASK 5: diff verification
+#---------------------------
+diff_threshold=5
+
+echo -e "\nshell result VS DuckDB text result:" | tee -a "$log_file"
+diff_count=$(diff -y --suppress-common-lines ../out/shell_result.tsv ../out/duckdb_text_result.tsv | wc -l) || true
+echo -e "$diff_count differing lines found" | tee -a "$log_file"
+if (( diff_count >= diff_threshold )); then
+	echo -e "ERROR: diff_count reached threshold" | tee -a "$log_file"  >&2
+	exit 3
+fi
+
+echo -e "\nDuckDB text result VS DuckDB Parquet result:" | tee -a "$log_file"
+diff_count=$(diff -y --suppress-common-lines ../out/duckdb_text_result.tsv ../out/duckdb_parquet_result.tsv | wc -l) || true
+echo -e "$diff_count differing lines found" | tee -a "$log_file"
+if (( diff_count >= diff_threshold )); then
+        echo -e "ERROR: diff_count reached threshold" | tee -a "$log_file"  >&2
+        exit 3
+fi
+

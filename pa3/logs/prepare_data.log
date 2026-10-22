@@ -3,7 +3,7 @@ Filtering dataset...
 
 Validating records...
 ...Records Validated:
-235 records kept out of 1008
+53152509 records kept out of 238015730
 
 Running shell analysis...
 ...Done
@@ -11,3 +11,9 @@ Running duckdb analysis...
 ...Done
 Running duckdb parquet analysis...
 ...Done
+
+shell result VS DuckDB text result:
+1 differing lines found
+
+DuckDB text result VS DuckDB Parquet result:
+0 differing lines found
