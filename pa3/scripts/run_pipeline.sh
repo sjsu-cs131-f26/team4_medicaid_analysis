@@ -12,7 +12,6 @@ fi
 
 #Global variables
 mkdir -p ../work ../logs ../out
-output_file="../work/analysis_ready.tsv"
 log_file="../logs/prepare_data.log"
 DUCKDB="/mnt/scratch/CS131_jelenag/tools/duckdb-current/duckdb"
 
@@ -30,18 +29,18 @@ echo -e "Filtering dataset..." | tee "$log_file"
 cut -d',' -f3,4,6,7 "$dataset_file" | \
 sed 's/,/\t/g' | \
 awk -F'\t' '($4 > 0 || NR == 1) {print $0}' | \
-awk -F'\t' '(NR == 1 || $1 ~ /^[A-Z][0-9]{4}$/) {print $0}' > "$output_file"
+awk -F'\t' '(NR == 1 || $1 ~ /^[A-Z][0-9]{4}$/) {print $0}' > "../work/analysis_ready.tsv"
 
 echo -e "..Data filtered\n" | tee -a "$log_file"
 
 # Ensures each row has exactly 4 fields
 echo "Validating records..." | tee -a "$log_file"
-if ! awk -F'\t' '(NF != 4) { exit 1 }' "$output_file"; then
+if ! awk -F'\t' '(NF != 4) { exit 1 }' "../work/analysis_ready.tsv"; then
 	echo -e "ERROR: Incorrect field count" | tee -a "$log_file"  >&2
 	exit 2
 fi
 echo -e "...Records Validated:" | tee -a "$log_file"
-echo -e "$(wc -l < "$output_file") records kept out of $(wc -l < "$dataset_file")\n" | tee -a "$log_file"
+echo -e "$(wc -l < ../work/analysis_ready.tsv) records kept out of $(wc -l < "$dataset_file")\n" | tee -a "$log_file"
 
 #---------------------------
 #TASK 4: Three way analysis
@@ -60,6 +59,12 @@ $DUCKDB ../work/project.duckdb < ../sql/build_parquet.sql > ../logs/build_parque
 $DUCKDB ../work/project.duckdb < ../sql/analysis_parquet.sql > ../logs/duckdb_parquet.log 2>&1
 echo -e "...Done" | tee -a "$log_file"
 
+# Verify each sample is nonempty
+if [[ ! -s "../out/shell_result.tsv" || ! -s "../out/duckdb_text_result.tsv" || ! -s "../out/duckdb_parquet_result.tsv" ]]; then
+        echo -e "ERROR: Three way analysis generated one or more empty files" >&2
+        exit 3
+fi
+
 #---------------------------
 #TASK 5: diff verification
 #---------------------------
@@ -70,7 +75,7 @@ diff_count=$(diff -y --suppress-common-lines ../out/shell_result.tsv ../out/duck
 echo -e "$diff_count differing lines found" | tee -a "$log_file"
 if (( diff_count >= diff_threshold )); then
 	echo -e "ERROR: diff_count reached threshold" | tee -a "$log_file"  >&2
-	exit 3
+	exit 4
 fi
 
 echo -e "\nDuckDB text result VS DuckDB Parquet result:" | tee -a "$log_file"
@@ -78,6 +83,16 @@ diff_count=$(diff -y --suppress-common-lines ../out/duckdb_text_result.tsv ../ou
 echo -e "$diff_count differing lines found" | tee -a "$log_file"
 if (( diff_count >= diff_threshold )); then
         echo -e "ERROR: diff_count reached threshold" | tee -a "$log_file"  >&2
-        exit 3
+        exit 4
 fi
 
+#----------------------------------------
+#TASK 7: Build one complete entry script
+#----------------------------------------
+
+# Since all outputs generally result in the same thing, we choose one to copy as the final result.
+echo -e "\nGenerating final analysis..."
+cp ../out/duckdb_text_result.tsv ../out/final_analysis.tsv
+echo -e "...Done"
+
+echo -e "\nScript successfully completed!\n"
