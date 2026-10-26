@@ -1,0 +1,2 @@
+UID          PID    PPID  C STIME TTY          TIME CMD
+rupashi+ 1272322 1224223  0 23:04 pts/165  00:00:00 bash run_pipeline.sh ../../../medicaid-provider-spending.csv
