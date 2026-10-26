@@ -1,0 +1,34 @@
+Task 8 Background Execution Proof
+
+Exact launch command:
+nohup bash run_pipeline.sh ../../../medicaid-provider-spending.csv > ../logs/background_run.log 2>&1 &
+
+PID: 1272322
+
+Process-monitoring result:
+UID          PID    PPID  C STIME TTY          TIME CMD
+rupashi+ 1272322 1224223  0 23:04 pts/165  00:00:00 bash run_pipeline.sh ../../../medicaid-provider-spending.csv
+
+Tail of run log:
+53152509 records kept out of 238015730
+
+Running shell analysis...
+...Done
+Running duckdb analysis...
+...Done
+Running duckdb parquet analysis...
+...Done
+
+shell result VS DuckDB text result:
+1 differing lines found
+
+DuckDB text result VS DuckDB Parquet result:
+0 differing lines found
+
+Generating final analysis...
+...Done
+
+Script successfully completed!
+
+
+Final exit status: 0
