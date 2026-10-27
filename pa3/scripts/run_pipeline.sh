@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-#Parameters
-dataset_file="${1:-../data/sample/sample_1000.csv}"
+
+input_param="${1:-../data/sample/sample.tsv}"
+
+if [[ "$input_param" = /* ]]; then
+	dataset_file="$input_param"
+else
+	dataset_file="$(pwd)/$input_param"
+fi
+
+cd "$(dirname "$(readlink -f "${BASH_SOURCE}")")"
+
 
 #Parameter validation
 if [[ ! -f "$dataset_file" || ! -r "$dataset_file" || ! -s "$dataset_file" ]]; then
@@ -45,6 +54,8 @@ echo -e "$(wc -l < ../work/analysis_ready.tsv) records kept out of $(wc -l < "$d
 #---------------------------
 #TASK 4: Three way analysis
 #---------------------------
+
+cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 echo -e "Running shell analysis..." | tee -a "$log_file"
 ./run_shell_analysis.sh

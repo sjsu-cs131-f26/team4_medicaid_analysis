@@ -1,4 +1,5 @@
 # Main input and output
+cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 dataset_file=$"../work/analysis_ready.tsv"
 output_file=$"../out/shell_result.tsv"
 

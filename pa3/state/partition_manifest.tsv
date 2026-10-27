@@ -1,4 +1,9 @@
 partition_id	partition_path
-2018-01	/mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3/work/partitions/2018-01.parquet
-2018-02	/mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3/work/partitions/2018-02.parquet
-2018-03	/mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3/work/partitions/2018-03.parquet
+2018	../work/partitions/'year=2018'/data_0.parquet
+2019	../work/partitions/'year=2019'/data_0.parquet
+2020	../work/partitions/'year=2020'/data_0.parquet
+2021	../work/partitions/'year=2021'/data_0.parquet
+2022	../work/partitions/'year=2022'/data_0.parquet
+2023	../work/partitions/'year=2023'/data_0.parquet
+2024	../work/partitions/'year=2024'/data_0.parquet
+

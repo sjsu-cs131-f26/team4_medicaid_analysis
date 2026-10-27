@@ -1,0 +1,19 @@
+Marius, Devin, Rupashi, Justin, Dylan
+
+https://github.com/sjsu-cs131-f26/team4_medicaid_analysis/
+
+pa3/
+
+https://github.com/sjsu-cs131-f26/team4_medicaid_analysis/tree/main/pa3
+
+./run_pipeline.sh /mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/medicaid-provider-spending.csv
+
+https://github.com/sjsu-cs131-f26/team4_medicaid_analysis/pulls?q=is%3Apr+state%3Aclosed (All these PRs were used for project 3)
+
+https://trello.com/b/k71Nv6qN/cs131team4
+
+All artifacts are named exactly as requested in assignment; there is no deviation.
+
+docs/technical_report.pdf
+
+The full dataset was not committed
