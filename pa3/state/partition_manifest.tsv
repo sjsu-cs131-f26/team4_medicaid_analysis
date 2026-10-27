@@ -1,0 +1,4 @@
+partition_id	partition_path
+2018-01	/mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3/work/partitions/2018-01.parquet
+2018-02	/mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3/work/partitions/2018-02.parquet
+2018-03	/mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3/work/partitions/2018-03.parquet
