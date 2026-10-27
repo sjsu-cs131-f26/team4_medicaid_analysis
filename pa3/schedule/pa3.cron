@@ -1,0 +1,1 @@
+15 19 * * * /mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3/scripts/run_scheduled.sh >> /mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3/logs/cron.log 2>&1

@@ -1,0 +1,44 @@
+Task 9 Scheduling Proof
+
+Partition rule:
+The Medicaid data is partitioned by CLAIM_FROM_MONTH. Each Parquet file contains all valid records from one month. This is meaningful because the project analyzes monthly changes in total payments and claim-line demand.
+
+Partition manifest:
+2018-01	/mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3/work/partitions/2018-01.parquet
+2018-02	/mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3/work/partitions/2018-02.parquet
+2018-03	/mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3/work/partitions/2018-03.parquet
+
+Cron entry:
+15 19 * * * /mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3/scripts/run_scheduled.sh >> /mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3/logs/cron.log 2>&1
+
+Cron interpretation:
+15 = minute 15
+19 = hour 19, or 7:00 PM
+First * = every day of the month
+Second * = every month
+Third * = every day of the week
+
+Crontab verification:
+The entry was installed using crontab schedule/pa3.cron and verified using crontab -l.
+
+Successful partition runs:
+2018-01 completed successfully with exit status 0.
+2018-02 completed successfully with exit status 0.
+2018-03 completed successfully with exit status 0.
+
+Cron log evidence:
+2026-10-26 21:32:20	2018-01	...	0
+2026-10-26 21:32:36	2018-02	...	0
+2026-10-26 21:33:17	2018-03	...	0
+
+Partition outputs:
+out/partitions/2018-01_result.tsv
+out/partitions/2018-02_result.tsv
+out/partitions/2018-03_result.tsv
+
+Success markers:
+state/completed/2018-01.done
+state/completed/2018-02.done
+state/completed/2018-03.done
+
+All three partition runs completed successfully with exit status 0.
