@@ -40,4 +40,4 @@ Exact agreement on this benchmark does not resolve the separate discrepancy prev
 
 ## Contribution and AI disclosure
 
-Justin Lao implemented and ran the Task 6 benchmark workflow with AI assistance for script drafting, command explanations, and interpreting measured results. Timings were collected by executing the script on IBM.
+Justin Lao implemented and ran the Task 6 benchmark workflow with AI assistance for script drafting, command explanations, and interpreting measured results. Timings were collected by executing the script on IBM. Code was hand-written with AI guidance, not AI generated.

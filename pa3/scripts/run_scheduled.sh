@@ -3,7 +3,7 @@
 set -u
 set -o pipefail
 
-PROJECT_DIR="/mnt/scratch/CS131_jelenag/projects/team04_sec02_fall2026/team4_medicaid_analysis/pa3"
+PROJECT_DIR="../"
 MANIFEST="$PROJECT_DIR/state/partition_manifest.tsv"
 COMPLETED_DIR="$PROJECT_DIR/state/completed"
 LOG_DIR="$PROJECT_DIR/logs"
@@ -28,6 +28,7 @@ fi
 
 PARTITION_ID="${NEXT_PARTITION%%$'\t'*}"
 PARTITION_PATH="${NEXT_PARTITION#*$'\t'}"
+PARTITION_PATH="${PARTITION_PATH//\'/}"
 PARTITION_LOG="$LOG_DIR/partition_${PARTITION_ID}.log"
 START_TIME="$(date '+%Y-%m-%d %H:%M:%S')"
 
