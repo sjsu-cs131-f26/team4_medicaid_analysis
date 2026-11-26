@@ -1,0 +1,10 @@
+Marius: PA5 & report writing
+Rupashi: Data analysis & report writing
+Devin: Data analysis & report writing
+Justin: report writing
+
+We have not PRs for this submission since everything was shared via Google
+
+AI Use Disclosure:
+
+AI was used for debugging, understanding, and learning, but was not used to generate the report or code by itself.  Everything is explainable and well understood
