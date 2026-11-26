@@ -1,0 +1,7 @@
+implementation,environment,input_rows,input_bytes,format,run,elapsed_seconds,output_rows,result_verified
+DuckDB,Colab Local,234,16039,TSV,1,0.0998,112,True
+DuckDB,Colab Local,234,16039,TSV,2,0.0458,112,True
+DuckDB,Colab Local,234,16039,TSV,3,0.0406,112,True
+PySpark,Local Spark 4.0.0,234,16039,TSV,1,2.7265,112,False
+PySpark,Local Spark 4.0.0,234,16039,TSV,2,2.9216,112,False
+PySpark,Local Spark 4.0.0,234,16039,TSV,3,2.2288,112,False

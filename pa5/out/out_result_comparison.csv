@@ -1,0 +1,6 @@
+Metric,Value
+Dataproc Row Count,4913
+Local Spark Row Count,4913
+Rows Only in Dataproc,0
+Rows Only in Local,0
+Full Equivalence Match,True
